@@ -1,0 +1,25 @@
+nav {
+    width: 100vw;
+    height: 10vh;
+    text-align: center;
+    margin: 0;
+}
+
+section {
+    width: 100vw;
+    height: 90vh;
+    margin: 0;
+    text-align: center;
+}
+
+#submit {
+    float: right;
+}
+
+p {
+    font-size: 5vh;
+}
+
+#submitBox, #answerForm {
+    font-size: 3vh;
+}
