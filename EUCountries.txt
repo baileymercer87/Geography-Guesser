@@ -1,0 +1,55 @@
+Albania,Tirana
+Andorra,Andorra la vella
+Armenia,Yerevan
+Austria,Vienna
+Azerbaijan,Baku
+Belarus,Minsk
+Belgium,Brussels
+Bosnia and Herzegovina,Sarajevo
+Bulgaria,Sofia
+Croatia,Zagreb
+Cyprus,Nicosia
+Czechia,Prague
+Denmark,Copenhagen
+Estonia,Tallinn
+Finland,Helsinki
+France,Paris
+Georgia,Tbilisi
+Germany,Berlin
+Greece,Athens
+Hungary,Budapest
+Iceland,Reykjavik
+Ireland,Dublin
+Israel,Jerusalem
+Italy,Rome
+Kazakhstan,Nur-Sultan
+Kyrgyzstan,Bishkek
+Latvia,Riga
+Lithuania,Vilnius
+Luxembourg,Luxembourg City
+Malta,Valletta
+Monaco,Monaco
+Montenegro,Podgorica
+Netherlands,Amsterdam
+North Macedonia,Skopje
+Norway,Oslo
+Poland,Warsaw
+Portugal,Lisbon
+Republic of Moldova,Chisinau
+Romania,Bucharest
+Russian Federation,Moscow
+San Marino,San Marino
+Serbia,Belgrade
+Slovakia,Bratislava
+Slovenia,Ljubljana
+Spain,Madrid
+Sweden,Stockholm
+Switzerland,Bern
+Tajikistan,Dushanbe
+Turkey,Ankara
+Turkmenistan,Ashgabat
+Ukraine,Kyiv
+England,London
+Uzbekistan,Tashkent
+Wales,Cardiff
+Scotland,Edinbrugh

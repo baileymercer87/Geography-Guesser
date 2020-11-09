@@ -12,14 +12,17 @@ section {
     text-align: center;
 }
 
-#submit {
-    float: right;
-}
-
 p {
     font-size: 5vh;
 }
 
-#submitBox, #answerForm {
+#answerForm, #submitButton {
     font-size: 3vh;
+}
+
+#beginButton {
+    display: block;
+    font-size: 2.5vh;
+    margin-left: 48vw;
+    margin-bottom: 2vh;
 }
