@@ -7,16 +7,21 @@
 </head>
 
 
-<body>
+<body id="body">
     <nav>
         <h1>European City Knowledge</h1>
     </nav>
 
     <section>
         <p id="question">Q - Question Will Appear Here, All you need to do is type the answer and press Submit/ Enter!</p>
-        <input type="submit" value="Begin" onclick="start()" id="beginButton">
+        <div id="buttonArea">
+            <input type="submit" value="Begin" onclick="start()" id="beginButton">
+        </div>
         <input type="form" id="answerForm">
         <input type="submit" onclick="submit()" id="submitButton">
+        <p id="timer">1:00</p>
+        <h3 id="resultsText"></h3>
+        <h3 id="numOfCorrect"></h3>
     </section>
 
     <script src="euro.js"></script>

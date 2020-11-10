@@ -26,3 +26,15 @@ p {
     margin-left: 48vw;
     margin-bottom: 2vh;
 }
+
+#timer {
+    font-size: 3vh;
+}
+
+#buttonArea {
+    text-align: center;
+}
+
+body {
+    background: linear-gradient(to left, #ffffff 0%, #ccccff 100%);
+}
