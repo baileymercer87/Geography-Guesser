@@ -9,7 +9,7 @@ let pointList = [];
 var correctAnswers = 0;
 var which = true;
 let time = 60;
-
+let alreadyInterval = false;
 window.addEventListener('keydown', keysPressed);
 window.addEventListener('keyup', keysReleased);
 
@@ -50,11 +50,11 @@ function submit() {
     else if (answer.toUpperCase() == comparedAnswer.toUpperCase()) {
         console.log("Correct")
         correctAnswers = correctAnswers + 1;
-        background.style.backgroundColor = 'green';
+        background.style.background = 'linear-gradient(to bottom right, #66ff99 0%, #33cc33 100%)';
     }
     else {
         console.log("Incorrect");
-        background.style.backgroundColor = 'red';
+        background.style.background = 'linear-gradient(to bottom right, #ff6666 0%, #ff0000 100%)';
         if (which == true) {
             var correctAnswer = "INCORRECT - The correct answer was " + countries[pointList[pointList.length-1]] + "!";
         }
@@ -90,7 +90,10 @@ function start() {
     correctAnswers = 0;
     time = 60;
     pointList = [];
-    setInterval(updateCountdown,1250);
+    if (alreadyInterval == false) {
+        setInterval(updateCountdown,1250);
+        alreadyInterval = true;
+    }
     submit();
 }
 
@@ -99,7 +102,7 @@ function updateCountdown() {
         endGame();
     }
     else if (time == -1){
-        console.log(".");
+        timer.innerHTML = "0";
     }
     else {
         time--;
@@ -117,10 +120,18 @@ function endGame() {
     time = -1;
     correctAnswers = 0;
     var area = document.getElementById("buttonArea");
+    var text = document.createElement("H3");
+    text.innerHTML = "Click below to try again!";
+    text.id = "againText";
+    area.appendChild(text);
     var button = document.createElement("INPUT");
     button.setAttribute("type", "button");
-    button.value = "Play Again";
-    button.onclick =  function() { start(); };
+    button.value = "Start";
+    button.onclick =  function() { 
+        x = document.getElementById("againText");
+        x.parentNode.removeChild(x);
+        start(); 
+    };
     button.id = "beginButton";
     button.style.marginRight = "40vw";
     area.appendChild(button);
@@ -140,4 +151,33 @@ function checkHighscore(num) {
         console.log("No high score");
         return false;
     }
+}
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+function results() {
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+  }
 }
