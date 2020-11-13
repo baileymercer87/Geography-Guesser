@@ -84,3 +84,9 @@ p {
   .results {
       font-size: 3vh;
   }
+
+#chartContainer {
+      width: 60vw;
+      height: 50vh;
+      margin-left: 10vw;
+  }

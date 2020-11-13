@@ -10,6 +10,7 @@ var correctAnswers = 0;
 var which = true;
 let time = 60;
 let alreadyInterval = false;
+let previousResults = [1,2,3,4,5,6,7,8,9]
 window.addEventListener('keydown', keysPressed);
 window.addEventListener('keyup', keysReleased);
 
@@ -107,6 +108,7 @@ function start() {
 
 //Function for the countdown
 function updateCountdown() {
+    const timer = document.getElementById("timer");
     if (time == 0) {
         endGame();
     }
@@ -116,7 +118,6 @@ function updateCountdown() {
     else {
         time--;
     }
-    const timer = document.getElementById("timer");
     timer.innerHTML = `${time}`;
 }
 
@@ -129,6 +130,15 @@ function endGame() {
         document.getElementById("question").innerHTML = 'HIGHSCORE! With ' + correctAnswers + ' points!';
     }
 
+    if (previousResults.length < 10) {
+        previousResults.push(correctAnswers);
+    }
+    else {
+        previousResults.shift();
+        previousResults.push(correctAnswers);
+    }
+    console.log(previousResults.length);
+    console.log(previousResults);
     //Stopping time icrement and resetting correct answers
     time = -1;
     correctAnswers = 0;
@@ -183,7 +193,21 @@ function results() {
     var modal = document.getElementById("myModal");
     var high = window.localStorage.getItem('highest');
     modal.style.display = "block";
-    document.getElementById("highscore").innerHTML = "Your current highscore is: " + high + "!"
+    document.getElementById("highscore").innerHTML = "Highscore:  " + high
+
+    let myChart = document.getElementById("graph").getContext('2d');
+    console.log(previousResults);
+    let lineGraph = new Chart(myChart, {
+        type: 'line',
+        data: {
+            labels:['1','2','3','4','5','6','7','8','9','10'],
+            datasets:[{
+                label:'Correct Answers',
+                data:[10,13,14,12,9,18,16,10,8,12]
+            }]
+        },
+        options:{}
+    });
 }
 
 // Close pop up
