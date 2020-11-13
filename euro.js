@@ -10,7 +10,16 @@ var correctAnswers = 0;
 var which = true;
 let time = 60;
 let alreadyInterval = false;
-let previousResults = [1,2,3,4,5,6,7,8,9]
+let previousResults = window.localStorage.getItem('previousResults');
+console.log(previousResults);
+
+if (previousResults == undefined) {
+    previousResults = [0,0,0,0,0,0,0,0,0,0];
+}
+else {
+    previousResults = previousResults.split(',');
+}
+
 window.addEventListener('keydown', keysPressed);
 window.addEventListener('keyup', keysReleased);
 
@@ -130,15 +139,11 @@ function endGame() {
         document.getElementById("question").innerHTML = 'HIGHSCORE! With ' + correctAnswers + ' points!';
     }
 
-    if (previousResults.length < 10) {
-        previousResults.push(correctAnswers);
-    }
-    else {
-        previousResults.shift();
-        previousResults.push(correctAnswers);
-    }
-    console.log(previousResults.length);
-    console.log(previousResults);
+    //Adding result to list of recent results
+    previousResults.shift();
+    previousResults.push(correctAnswers);
+
+    window.localStorage.setItem('previousResults', previousResults);
     //Stopping time icrement and resetting correct answers
     time = -1;
     correctAnswers = 0;
@@ -203,7 +208,7 @@ function results() {
             labels:['1','2','3','4','5','6','7','8','9','10'],
             datasets:[{
                 label:'Correct Answers',
-                data:[10,13,14,12,9,18,16,10,8,12]
+                data:[previousResults[0],previousResults[1],previousResults[2],previousResults[3],previousResults[4],previousResults[5],previousResults[6],previousResults[7],previousResults[8],previousResults[9]]
             }]
         },
         options:{}
