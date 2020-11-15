@@ -11,7 +11,8 @@ var which = true;
 let time = 60;
 let alreadyInterval = false;
 let previousResults = window.localStorage.getItem('previousResults');
-console.log(previousResults);
+
+let gameInProgress = false;
 
 if (previousResults == undefined) {
     previousResults = [0,0,0,0,0,0,0,0,0,0];
@@ -40,69 +41,74 @@ function keysReleased(e) {
 
 //Function for submitting an answer
 function submit() {
-
-    document.getElementById("resultsText").innerHTML = " ";
-    //Fetching answer
-    const answer = document.getElementById("answerForm").value;
-
-    const background = document.getElementById("body");
-    
-    //Finding the answer from the list
-    if (which == true) {
-        var comparedAnswer = countries[pointList[pointList.length-1]];
+    if (gameInProgress == false) {
+        console.log('in progress');
     }
     else {
-        var comparedAnswer = cities[pointList[pointList.length-1]];
-    }
+        document.getElementById("resultsText").innerHTML = " ";
+        //Fetching answer
+        const answer = document.getElementById("answerForm").value;
 
-    //Comparing user answer to actual answer and adding point / changing background if correct or incorrect
-    if (countries[pointList[pointList.length-1]] == undefined) {
-        console.log("Started");
-    }
-    else if (answer.toUpperCase() == comparedAnswer.toUpperCase()) {
-        console.log("Correct")
-        correctAnswers = correctAnswers + 1;
-        background.style.background = 'linear-gradient(to bottom right, #66ff99 0%, #33cc33 100%)';
-    }
-    else {
-        console.log("Incorrect");
-        background.style.background = 'linear-gradient(to bottom right, #ff6666 0%, #ff0000 100%)';
-        //Displaying the correct answer
+        const background = document.getElementById("body");
+        
+        //Finding the answer from the list
         if (which == true) {
-            var correctAnswer = "INCORRECT - The correct answer was " + countries[pointList[pointList.length-1]] + "!";
+            var comparedAnswer = countries[pointList[pointList.length-1]];
         }
         else {
-            var correctAnswer = "INCORRECT - The correct answer was " + cities[pointList[pointList.length-1]] + "!";
+            var comparedAnswer = cities[pointList[pointList.length-1]];
         }
-        document.getElementById("resultsText").innerHTML = correctAnswer;
+
+        //Comparing user answer to actual answer and adding point / changing background if correct or incorrect
+        if (countries[pointList[pointList.length-1]] == undefined) {
+            console.log("Started");
+        }
+        else if (answer.toUpperCase() == comparedAnswer.toUpperCase()) {
+            console.log("Correct")
+            correctAnswers = correctAnswers + 1;
+            background.style.background = 'linear-gradient(to bottom right, #66ff99 0%, #33cc33 100%)';
+        }
+        else {
+            console.log("Incorrect");
+            background.style.background = 'linear-gradient(to bottom right, #ff6666 0%, #ff0000 100%)';
+            //Displaying the correct answer
+            if (which == true) {
+                var correctAnswer = "INCORRECT - The correct answer was " + countries[pointList[pointList.length-1]] + "!";
+            }
+            else {
+                var correctAnswer = "INCORRECT - The correct answer was " + cities[pointList[pointList.length-1]] + "!";
+            }
+            document.getElementById("resultsText").innerHTML = correctAnswer;
+        }
+
+        //Displaying current score
+        document.getElementById("numOfCorrect").innerHTML = "Correct Answers: " + correctAnswers;
+
+        //Generating 2 random numbers, one for cities or countries and one for a point in the list
+        const pick = Math.floor(Math.random() * 2);
+        const point = Math.floor(Math.random() * 56);
+
+        pointList.push(point);
+        
+        //Generating question based on the random numbers
+        if (pick == 0) {
+            which = false;
+            document.getElementById("question").innerHTML = "Q - What is the capital of " + countries[point] + "?";
+        }
+        else {
+            which = true;
+            document.getElementById("question").innerHTML = "Q - " + cities[point] + " is the capital of what Country?";
+        }
+
+        document.getElementById("answerForm").value = "";
+        document.getElementById("answerForm").focus();
     }
-
-    //Displaying current score
-    document.getElementById("numOfCorrect").innerHTML = "Correct Answers: " + correctAnswers;
-
-    //Generating 2 random numbers, one for cities or countries and one for a point in the list
-    const pick = Math.floor(Math.random() * 2);
-    const point = Math.floor(Math.random() * 56);
-
-    pointList.push(point);
-    
-    //Generating question based on the random numbers
-    if (pick == 0) {
-        which = false;
-        document.getElementById("question").innerHTML = "Q - What is the capital of " + countries[point] + "?";
-    }
-    else {
-        which = true;
-        document.getElementById("question").innerHTML = "Q - " + cities[point] + " is the capital of what Country?";
-    }
-
-    document.getElementById("answerForm").value = "";
-    document.getElementById("answerForm").focus();
 }
 
 //Function to start the quiz and set all correct variables to begin
 function start() {
-    console.log("START");
+    gameInProgress = true;
+
     var elem = document.getElementById('beginButton');
     elem.parentNode.removeChild(elem);
     correctAnswers = 0;
@@ -122,16 +128,17 @@ function updateCountdown() {
         endGame();
     }
     else if (time == -1){
-        timer.innerHTML = "0";
+        timer.innerHTML = "60";
     }
     else {
         time--;
+        timer.innerHTML = `${time}`;
     }
-    timer.innerHTML = `${time}`;
 }
 
 //Function for ending the game, changing text and preparing for another game
 function endGame() {
+    gameInProgress = false;
     document.getElementById("question").innerHTML = 'Time is up! You scored ' + correctAnswers + ' points!';
     //Checking wether to display highscore text
     highscore = checkHighscore(correctAnswers);
@@ -147,6 +154,8 @@ function endGame() {
     //Stopping time icrement and resetting correct answers
     time = -1;
     correctAnswers = 0;
+
+    document.getElementById("numOfCorrect").innerHTML = "";
 
     //Adding a button to start again
     var area = document.getElementById("buttonArea");
@@ -208,7 +217,9 @@ function results() {
             labels:['1','2','3','4','5','6','7','8','9','10'],
             datasets:[{
                 label:'Correct Answers',
-                data:[previousResults[0],previousResults[1],previousResults[2],previousResults[3],previousResults[4],previousResults[5],previousResults[6],previousResults[7],previousResults[8],previousResults[9]]
+                data:[previousResults[0],previousResults[1],previousResults[2],previousResults[3],previousResults[4],previousResults[5],previousResults[6],previousResults[7],previousResults[8],previousResults[9]],
+                fill: false,
+                color: 'blue'
             }]
         },
         options:{}
