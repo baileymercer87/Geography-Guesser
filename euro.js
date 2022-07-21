@@ -209,7 +209,6 @@ function results() {
     document.getElementById("highscore").innerHTML = "Highscore:  " + high
 
     let myChart = document.getElementById("graph").getContext('2d');
-    console.log(previousResults);
     let lineGraph = new Chart(myChart, {
         type: 'line',
         data: {
