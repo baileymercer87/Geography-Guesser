@@ -41,6 +41,9 @@ p {
 
 #resultsButton {
     margin-top: 10vh;
+    padding: 2vh;
+    border-radius: 3px;
+    border: none;
 }
 
 
