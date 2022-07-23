@@ -1,8 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
+
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+    letter-spacing: 2px;
+}
+
 nav {
     width: 100vw;
     height: 10vh;
     text-align: center;
     margin: 0;
+}
+
+p {
+    position: absolute;
+    text-align: center;
+    top: 17vh;
+    left: 9.5vh;
+    z-index: 1;
 }
 
 section {
@@ -15,20 +30,28 @@ a {
     display: inline-block;
     border: 3px solid black;
     border-radius: 5px;
-    padding: 4vh;
     font-size: 3vh;
     margin-top: 2vh;
     margin-left: 5vh;
+    height: 20vh;
+    width: 20vh;
     text-decoration: none;
     color: black;
 }
 
-a:hover {
-    background-color: lightgrey;
-    animation: hover;
-    animation-duration: 0.5s;
+img {
+    height: 100%;
+    width: 100%;
+    margin: none;
 }
 
+img:hover {
+    filter: brightness(50%);
+}
+
+p:hover + img{
+    filter: brightness(50%);
+}
 @keyframes hover {
     0% {
         background-color: white;
